@@ -1,19 +1,17 @@
 class Api::LinksController < ApiController
-  def index
-    render json: {
-      id: 1,
-      domain: 'example.com',
-      link: 'http://example.com',
-      slug: 'aHR0cDovL'
-    }
+  def create
+    @url = Url.new(url_params)
+    if @url.save
+      render json: @url, root: false
+    else
+      payload = { errors: @url.errors, url: @url }
+      render json: payload, status: 400
+    end
   end
 
-  def create
-    render json: {
-      id: 1,
-      domain: 'example.com',
-      link: 'http://example.com',
-      slug: 'aHR0cDovL'
-    }
+  private
+
+  def url_params
+    params.permit(:url)
   end
 end

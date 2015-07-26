@@ -6,7 +6,22 @@ var ShortedLink = React.createClass({
     return (
       <div className='shorted-link-result-wrapper'>
         <div className='shorted-link-result-inner'>
-          {this.props.shortenedLink.slug}
+          <span className='label'>Shortened URL:</span>
+          <a href={this.props.shortenedLink.shorted_url} target="_blank">
+            {this.props.shortenedLink.shorted_url}
+          </a>
+        </div>
+      </div>
+    );
+  }
+});
+
+var FormErrors = React.createClass({
+  render: function() {
+    return (
+      <div className='form-errors-wrapper'>
+        <div className='form-errors-inner'>
+          {this.props.error}
         </div>
       </div>
     );
@@ -17,6 +32,7 @@ var LinkShortenerForm = React.createClass({
   getInitialState: function() {
     return {
       loading: false,
+      error: null,
       shortenedLink: null
     };
   },
@@ -29,8 +45,13 @@ var LinkShortenerForm = React.createClass({
      .set('Content-Type', 'application/json')
      .send({url: url.value})
      .end(function(err, res) {
+      console.log('err', err)
+      console.log('res', res)
         if(err === null) {
-          _self.setState({ shortenedLink: res.body, loading: false })
+          url.value = null
+          _self.setState({ shortenedLink: res.body, loading: false, error: null })
+        } else {
+          _self.setState({ shortenedLink: null, error: res.body.errors, loading: false })
         }
      });
   },
@@ -43,6 +64,7 @@ var LinkShortenerForm = React.createClass({
       <div className='link-shortener-form-wrapper'>
         <div className='link-shortener-form-wrapper-inner'>
           <form className='link-shortener-form' onSubmit={this.onSubmit}>
+            {this.state.error ? <FormErrors error={this.state.error} /> : '' }
             <ul className='form-inputs'>
               <li>
                 <div className='control-group'>

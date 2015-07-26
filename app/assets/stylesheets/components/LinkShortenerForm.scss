@@ -46,4 +46,14 @@
     float: right;
     background: red;
   }
+
+  .shorted-link-result-wrapper {
+    text-align: center;
+    padding: 10px;
+    .label {
+      display: inline-block;
+      margin: 0 10px 0 0;
+      font-weight: 900;
+    }
+  }
 }

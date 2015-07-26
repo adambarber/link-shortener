@@ -1,0 +1,2 @@
+module Links::RedirectHelper
+end
