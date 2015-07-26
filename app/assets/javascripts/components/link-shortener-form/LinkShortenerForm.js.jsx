@@ -38,6 +38,9 @@ var LinkShortenerForm = React.createClass({
   },
   onSubmit: function(e) {
     e.preventDefault();
+    if(this.state.loading) {
+      return false;
+    }
     var _self = this;
     var url = this.refs.url.getDOMNode();
     this.setState({ loading: true })
@@ -45,8 +48,6 @@ var LinkShortenerForm = React.createClass({
      .set('Content-Type', 'application/json')
      .send({url: url.value})
      .end(function(err, res) {
-      console.log('err', err)
-      console.log('res', res)
         if(err === null) {
           url.value = null
           _self.setState({ shortenedLink: res.body, loading: false, error: null })
@@ -56,7 +57,6 @@ var LinkShortenerForm = React.createClass({
      });
   },
   render: function() {
-    console.log('state', this.state)
     var submitButtonClasses = classNames('submit-button', 'button', {
       loading: this.state.loading
     })
@@ -68,7 +68,7 @@ var LinkShortenerForm = React.createClass({
             <ul className='form-inputs'>
               <li>
                 <div className='control-group'>
-                  <input type='url' className='url-input' placeholder='http://example.com' ref='url' autoComplete="off" autoCorrect="off" autoCapitalize="off"/>
+                  <input type='url' className='url-input' required='true' placeholder='http://example.com' ref='url' autoComplete="off" autoCorrect="off" autoCapitalize="off"/>
                   <input type='submit' className={submitButtonClasses} value='Shorten Link' />
                 </div>
                 <span className='help-text'>

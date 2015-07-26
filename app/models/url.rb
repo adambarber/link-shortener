@@ -2,7 +2,7 @@ class Url < ActiveRecord::Base
   validates :url, presence: true
   validates :url, uniqueness: { message: 'URL has already been shorted.' }
 
-  before_save :set_domain_name, :downcase_url
+  before_save :clean_url, :set_domain_name
   after_commit :set_slug, on: :create
 
   def shorted_url
@@ -11,8 +11,9 @@ class Url < ActiveRecord::Base
 
   private
 
-  def downcase_url
-    self.url = self.url.downcase
+  def clean_url
+    downcase_url = self.url.downcase
+    self.url = downcase_url.gsub(/\/$/, '')
   end
 
   def set_domain_name

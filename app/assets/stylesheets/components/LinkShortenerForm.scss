@@ -45,6 +45,10 @@
     padding: 15px 14px;
     float: right;
     background: red;
+    &.loading {
+      background: #ccc;
+      border: 1px solid #999;
+    }
   }
 
   .shorted-link-result-wrapper {
