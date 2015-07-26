@@ -43,6 +43,7 @@ group :development, :test do
   gem 'spring'
 end
 
+gem 'react-rails', '~> 1.0'
 
 gem 'figaro', '>= 1.0.0.rc1'
 gem 'haml-rails'
