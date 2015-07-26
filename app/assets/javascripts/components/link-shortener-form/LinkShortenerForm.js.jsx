@@ -2,6 +2,13 @@ var classNames = require('classname');
 var request = require('superagent');
 
 var ShortedLink = React.createClass({
+  onClick: function(e) {
+    e.preventDefault();
+    var shortenedLink = this.refs.textarea.getDOMNode();
+    shortenedLink.select();
+    var successful = document.execCommand('copy');
+    console.log('successful', successful)
+  },
   render: function() {
     return (
       <div className='shorted-link-result-wrapper'>
@@ -10,6 +17,8 @@ var ShortedLink = React.createClass({
           <a href={this.props.shortenedLink.shorted_url} target="_blank">
             {this.props.shortenedLink.shorted_url}
           </a>
+          <textarea style={{opacity: 0, pointerEvents: 'none', position: 'absolute'}} ref='textarea'>{this.props.shortenedLink.shorted_url}</textarea>
+          <button onClick={this.onClick}>Copy Link</button>
         </div>
       </div>
     );
