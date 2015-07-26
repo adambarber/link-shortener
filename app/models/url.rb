@@ -6,7 +6,7 @@ class Url < ActiveRecord::Base
   after_commit :set_slug, on: :create
 
   def shorted_url
-    "http://l.lvh.me:3000/#{slug}"
+    "http://l.lvh.me:5000/#{slug}"
   end
 
   private

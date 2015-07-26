@@ -5,9 +5,7 @@ Rails.application.routes.draw do
     resources :links
   end
   constraints subdomain: 'l' do
-    namespace :links do
-      get "/:slug" => 'links/redirect#show'
-    end
+    get "/:slug" => 'links/redirect#show'
   end
 
   root 'home#index'

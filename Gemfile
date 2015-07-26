@@ -24,7 +24,7 @@ gem 'active_model_serializers'
 gem 'browserify-rails'
 # bundle exec rake doc:rails generates the API under doc/api.
 
-
+gem 'foreman'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
