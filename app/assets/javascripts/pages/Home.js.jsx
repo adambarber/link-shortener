@@ -1,7 +1,7 @@
 var LinkShortenerForm = require('../components/link-shortener-form/LinkShortenerForm.js.jsx')
 var Nav = require('../components/shared/Nav.js.jsx');
 
-Home = React.createClass({
+var Home = React.createClass({
   render: function() {
     return (
       <div>
@@ -16,4 +16,5 @@ Home = React.createClass({
   }
 });
 
+window.Home = Home;
 module.exports = Home;
