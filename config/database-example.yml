@@ -1,0 +1,19 @@
+development:
+  adapter:  postgresql
+  host:     localhost
+  encoding: unicode
+  database: LinkShortener_development
+  pool:     5
+  username: username
+  password:
+  template: template0
+
+test:
+  adapter:  postgresql
+  host:     localhost
+  encoding: unicode
+  database: LinkShortener_test
+  pool:     5
+  username: username
+  password:
+  template: template0
